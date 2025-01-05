@@ -1,12 +1,12 @@
-clear all;
-close all;
+%clear all;
+%close all;
 
 % Parametry symulacji
 N = 1000;               % Całkowita populacja
 I0 = 10;                % Początkowa liczba zakażonych
 R0 = 0;                 % Początkowa liczba ozdrowieńców
 S0 = N - I0 - R0;       % Początkowa liczba podatnych
-beta = 0.3;             % Wskaźnik zakaźności
+beta = 0.4;             % Wskaźnik zakaźności
 gamma = 0.1;            % Wskaźnik wyzdrowień
 T = 100;                % Czas symulacji (w dniach)
 
@@ -19,7 +19,8 @@ sir_model = @(t, y) [-beta * y(1) * y(2) / N;    % dS/dt
                       gamma * y(2)];           % dR/dt
 
 % Rozwiązanie równań różniczkowych
-[t, y] = ode45(sir_model, [0 T], y0);
+% [t, y] = ode45(sir_model, [0 T], y0);
+[ t, y ] = my_odeAB( sir_model, [0, T], y0 , 200);
 
 % Ekstrakcja wyników
 S = y(:, 1);  % Liczba podatnych
