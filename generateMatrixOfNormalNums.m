@@ -1,5 +1,5 @@
-function R= generateMatrixOfRandomNums(varargin)
-    rng(56);
+function R= generateMatrixOfNormalNums(varargin)
+    rng(65);
     if nargin == 1
         if isnumeric(varargin{1}) && isscalar(varargin{1})
             
@@ -18,8 +18,8 @@ function R= generateMatrixOfRandomNums(varargin)
     end
     R = zeros(dims);  
     for i = 1:numel(R)
-        R(i) = generateRandomNumer()         
+         
+        R(i) = generateNormalDisrtNumber();            
     end
 end
-
 

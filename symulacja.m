@@ -11,8 +11,8 @@ recovery_time = 69;  % Czas do wyzdrowienia (w iteracjach)
 
 % Początkowe pozycje i stany
 rng(42);  % Inicjalizacja generatora liczb losowych
-positions = area_size * rand(N, 2);     % Losowe pozycje
-velocities = randn(N, 2);              % Losowe prędkości
+positions = area_size * generateMatrixOfRandomNums(N, 2);     % Losowe pozycje
+velocities = generateMatrixOfNormalNums(N, 2);              % Losowe prędkości
 states = zeros(N, 1);                  % Stany: 0 = podatni, 1 = zakażeni, 2 = ozdrowieńcy
 states(1) = 1;                         % Jeden początkowo zakażony
 infection_timer = zeros(N, 1);         % Licznik czasu zakażenia
@@ -48,9 +48,9 @@ for step = 1:num_steps
         if states(i) == 1  % Jeśli osoba jest zakażona
             % Sprawdź, kto znajduje się w promieniu zakażenia
             distances = sqrt(sum((positions - positions(i, :)).^2, 2));
-            susceptible = find(states == 0 & distances < infection_radius);
+            susceptible = find(states == 0 & distances < infection_radius),
             if ~isempty(susceptible)
-                infection_chance = rand(size(susceptible));
+                infection_chance = generateMatrixOfRandomNums(size(susceptible));
                 new_infections = susceptible(infection_chance < beta);
                 states(new_infections) = 1;
             end
@@ -67,5 +67,8 @@ for step = 1:num_steps
     set(h, 'XData', positions(:, 1), 'YData', positions(:, 2), ...
         'CData', colors(states+1, :));
     drawnow;
+    
 end
 
+plotCuredHeatMap(positions,states,[area_size,area_size])
+plotInfectedHeatMap(positions,states,[area_size,area_size])
