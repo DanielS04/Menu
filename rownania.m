@@ -2,20 +2,20 @@ clear all;
 close all;
 
 % Parametry Symulacji
-N = 1000;               % <- Całkowita populacja
-I0 = 10;                % <- Początkowa liczba zakażonych
+N = 2000;               % <- Całkowita populacja
+I0 = 4;                % <- Początkowa liczba zakażonych
 R0 = 0;                 % <- Początkowa liczba ozdrowieńców 
 S0 = N - I0 - R0;       % <- Początkowa liczba podatnych
-beta = 2/10;            % <- Wskaźnik zakaźności
+beta = 4/10;            % <- Wskaźnik zakaźności
 gamma = 1/10;           % <- Wskaźnik wyzdrowień
-T = 100;                % <- Ilość dni symulacji
+T = 300;                % <- Ilość dni symulacji
 y0 = [ S0, I0, R0 ];    % <- Warunki początkowe
 
 % Definicja równań różniczkowych, model SIR
 % Z dodanym szumem
 % Kolejno: dS/dt ; dI/dt ; dR/dt
-szum1 = generateNormalDisrtNumber()*0.1,
-szum2 = generateNormalDisrtNumber()*0.1,
+szum1 = generateNormalDisrtNumber()*0.1;
+szum2 = generateNormalDisrtNumber()*0.1;
 sir = @( t, y ) [ (-beta * y(1) * y(2) / N) + szum1 ; 
                   (beta * y(1) * y(2) / N) - (gamma*y(2)) + szum2;
                   gamma * y(2)];

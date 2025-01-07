@@ -18,7 +18,7 @@ function R= generateMatrixOfRandomNums(varargin)
     end
     R = zeros(dims);  
     for i = 1:numel(R)
-        R(i) = generateRandomNumer()         
+        R(i) = generateRandomNumer();         
     end
 end
 

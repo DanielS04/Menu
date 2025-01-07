@@ -21,7 +21,7 @@ function plotInfectedHeatMap(positions,infected,city_size)
     Z_interp = interp2(X, Y, Z, X, Y, 'linear');  
     surf(X, Y, Z_interp, 'EdgeColor', 'none');  
     colorbar;
-    title('Wykres 3D zakarzonych');
+    title('Wykres 3D zakażonych');
     xlabel('X');
     ylabel('Y');
     zlabel('Liczba zakażonych');

@@ -2,19 +2,22 @@ clear all;
 close all;
 
 % Parametry symulacji
-N = 900;              % Liczba osób
-beta = 0.3;           % Współczynnik zakażania
+N = 2000;              % Liczba osób
+beta = 0.4;           % Współczynnik zakażania
 gamma = 0.1;          % Współczynnik wyzdrowienia
-area_size = 500;      % Rozmiar obszaru
+area_size = 800;      % Rozmiar obszaru
 infection_radius = 5; % Promień zakażenia
-recovery_time = 69;  % Czas do wyzdrowienia (w iteracjach)
+recovery_time = 90;  % Czas do wyzdrowienia (w iteracjach)
 
 % Początkowe pozycje i stany
 rng(42);  % Inicjalizacja generatora liczb losowych
 positions = area_size * generateMatrixOfRandomNums(N, 2);     % Losowe pozycje
 velocities = generateMatrixOfNormalNums(N, 2);              % Losowe prędkości
 states = zeros(N, 1);                  % Stany: 0 = podatni, 1 = zakażeni, 2 = ozdrowieńcy
-states(1) = 1;                         % Jeden początkowo zakażony
+states(1) = 1;                          % 3 początkowo zakażonych
+states(2) = 1;
+states(3) = 1;
+states(4) = 1;
 infection_timer = zeros(N, 1);         % Licznik czasu zakażenia
 
 % Kolory dla różnych stanów
@@ -48,7 +51,7 @@ for step = 1:num_steps
         if states(i) == 1  % Jeśli osoba jest zakażona
             % Sprawdź, kto znajduje się w promieniu zakażenia
             distances = sqrt(sum((positions - positions(i, :)).^2, 2));
-            susceptible = find(states == 0 & distances < infection_radius),
+            susceptible = find(states == 0 & distances < infection_radius);
             if ~isempty(susceptible)
                 infection_chance = generateMatrixOfRandomNums(size(susceptible));
                 new_infections = susceptible(infection_chance < beta);
@@ -70,5 +73,5 @@ for step = 1:num_steps
     
 end
 
-plotCuredHeatMap(positions,states,[area_size,area_size])
-plotInfectedHeatMap(positions,states,[area_size,area_size])
+plotCuredHeatMap(positions,states,[area_size,area_size]);
+plotInfectedHeatMap(positions,states,[area_size,area_size]);
