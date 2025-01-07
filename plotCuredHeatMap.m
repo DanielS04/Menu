@@ -5,7 +5,7 @@ function  plotCuredHeatMap(positions,cured,city_size)
     infected_grid = zeros(grid_size, grid_size); 
     
     for i = 1:length(cured)
-        if cured(i)
+        if cured(i)==2
             
             x_idx = find(positions(i, 1) <= grid_x, 1) - 1;
             y_idx = find(positions(i, 2) <= grid_y, 1) - 1;
