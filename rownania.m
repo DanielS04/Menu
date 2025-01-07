@@ -7,8 +7,8 @@ I0 = 4;                % <- Początkowa liczba zakażonych
 R0 = 0;                 % <- Początkowa liczba ozdrowieńców 
 S0 = N - I0 - R0;       % <- Początkowa liczba podatnych
 beta = 4/10;            % <- Wskaźnik zakaźności
-gamma = 1/10;           % <- Wskaźnik wyzdrowień
-T = 300;                % <- Ilość dni symulacji
+gamma = 1/90;           % <- Wskaźnik wyzdrowień
+T = 600;                % <- Ilość dni symulacji
 y0 = [ S0, I0, R0 ];    % <- Warunki początkowe
 
 % Definicja równań różniczkowych, model SIR
